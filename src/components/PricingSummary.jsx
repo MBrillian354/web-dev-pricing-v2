@@ -13,7 +13,7 @@ const PricingSummary = ({
 }) => {
     return (
         <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl shadow-md p-6 sticky top-6">
+            <div className="bg-white rounded-lg p-6 sticky top-6">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-6">
                     Cost Estimate
                 </h2>
@@ -130,7 +130,7 @@ const PricingSummary = ({
                     </p>
                 </div>
 
-                <button className="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-colors">
+                <button className="w-full mt-6 bg-blue-600 hover:bg-blue-500 text-white font-medium py-3 px-4 rounded-md hover:cursor-pointer transition-colors">
                     Get Detailed Quote
                 </button>
 

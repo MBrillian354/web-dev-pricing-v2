@@ -16,7 +16,7 @@ const ModuleSelector = ({ selectedModules, onToggle }) => {
             <h3 className="text-lg font-medium text-gray-700 mb-3">
                 Functional Modules
             </h3>
-            <div className="border rounded-lg divide-y">
+            <div className="border border-gray-400 rounded-lg divide-y divide-gray-400">
                 {categories.map((category) => (
                     <div key={category} className="p-4">
                         <h4 className="font-medium text-gray-800 mb-2">

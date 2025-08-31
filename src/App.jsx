@@ -55,7 +55,7 @@ const App = () => {
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Configuration Panel */}
-                    <div className="lg:col-span-2 bg-white rounded-xl shadow-md p-6">
+                    <div className="lg:col-span-2 bg-white rounded-lg p-6">
                         <div className="mb-8">
                             <h2 className="text-2xl font-semibold text-gray-800 mb-4">
                                 Project Configuration
