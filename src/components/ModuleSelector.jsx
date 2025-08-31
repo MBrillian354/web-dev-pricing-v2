@@ -46,7 +46,7 @@ const ModuleSelector = ({ selectedModules, onToggle }) => {
                                             {module.label}
                                         </label>
                                         <span className="text-xs font-medium text-blue-600">
-                                            +{formatCurrency(module.price)}
+                                            {formatCurrency(module.price)}
                                         </span>
                                     </div>
                                 ))}

@@ -1,4 +1,5 @@
 import React from "react";
+import { formatCurrency } from "../utils/formatCurrency";
 
 const BaseTypeSelector = ({ baseTypes, selectedBase, onSelect }) => {
     return (
@@ -39,7 +40,14 @@ const BaseTypeSelector = ({ baseTypes, selectedBase, onSelect }) => {
                                     </svg>
                                 )}
                             </div>
-                            <span className="font-medium">{base.label}</span>
+                            <div className="flex-1">
+                                <span className="font-medium">
+                                    {base.label}
+                                </span>
+                                <div className="font-semibold text-blue-500">
+                                    {formatCurrency(base.price)}
+                                </div>
+                            </div>
                         </div>
                         <p className="text-sm text-gray-600 ml-8">
                             {base.desc}
