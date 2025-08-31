@@ -3,14 +3,8 @@ import { modules } from "../constants/pricingData.js";
 import { formatCurrency } from "../utils/formatCurrency.js";
 
 const ModuleSelector = ({ selectedModules, onToggle }) => {
-    const categories = [
-        "User & Access",
-        "Payments",
-        "E-commerce",
-        "Communication",
-        "Data & Analytics",
-        "Advanced",
-    ];
+    // Dynamically get unique categories from modules data
+    const categories = Array.from(new Set(modules.map((m) => m.category)));
 
     return (
         <div className="mb-6">
