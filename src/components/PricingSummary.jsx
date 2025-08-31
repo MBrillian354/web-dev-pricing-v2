@@ -1,5 +1,5 @@
 import React from "react";
-import { modules, addOns, POINT_VALUE } from "../constants/pricingData.js";
+import { modules, addOns } from "../constants/pricingData.js";
 import { formatCurrency } from "../utils/formatCurrency.js";
 
 const PricingSummary = ({
@@ -22,7 +22,7 @@ const PricingSummary = ({
                     <div className="flex justify-between">
                         <span className="text-gray-600">Base Application</span>
                         <span className="font-medium">
-                            {formatCurrency(selectedBase.points * POINT_VALUE)}
+                            {formatCurrency(selectedBase.price)}
                         </span>
                     </div>
 
@@ -32,8 +32,7 @@ const PricingSummary = ({
                         </span>
                         <span className="font-medium">
                             {formatCurrency(
-                                selectedBase.points *
-                                    POINT_VALUE *
+                                selectedBase.price *
                                     (selectedTech.multiplier - 1)
                             )}
                         </span>
@@ -51,10 +50,7 @@ const PricingSummary = ({
                                             );
                                             return (
                                                 sum +
-                                                (module
-                                                    ? module.points *
-                                                      POINT_VALUE
-                                                    : 0)
+                                                (module ? module.price : 0)
                                             );
                                         }, 0)
                                     )}
@@ -72,9 +68,7 @@ const PricingSummary = ({
                                         >
                                             <span>+ {module.label}</span>
                                             <span>
-                                                {formatCurrency(
-                                                    module.points * POINT_VALUE
-                                                )}
+                                                {formatCurrency(module.price)}
                                             </span>
                                         </div>
                                     ) : null;

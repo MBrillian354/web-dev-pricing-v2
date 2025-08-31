@@ -1,5 +1,6 @@
 import React from "react";
 import { modules } from "../constants/pricingData.js";
+import { formatCurrency } from "../utils/formatCurrency.js";
 
 const ModuleSelector = ({ selectedModules, onToggle }) => {
     const categories = [
@@ -45,7 +46,7 @@ const ModuleSelector = ({ selectedModules, onToggle }) => {
                                             {module.label}
                                         </label>
                                         <span className="text-xs font-medium text-blue-600">
-                                            +{module.points} pts
+                                            +{formatCurrency(module.price)}
                                         </span>
                                     </div>
                                 ))}

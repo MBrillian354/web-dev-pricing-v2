@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { modules, addOns, POINT_VALUE } from "../constants/pricingData.js";
+import { modules, addOns } from "../constants/pricingData.js";
 
 export const usePricingCalculator = (
     selectedBase,
@@ -8,11 +8,11 @@ export const usePricingCalculator = (
     selectedAddOns
 ) => {
     return useMemo(() => {
-        const baseCost = selectedBase.points * POINT_VALUE;
+        const baseCost = selectedBase.price;
         const techMultipliedCost = baseCost * selectedTech.multiplier;
         const modulesCost = selectedModules.reduce((sum, moduleId) => {
             const module = modules.find((m) => m.id === moduleId);
-            return sum + (module ? module.points * POINT_VALUE : 0);
+            return sum + (module ? module.price : 0);
         }, 0);
 
         const subtotal = techMultipliedCost + modulesCost;
