@@ -11,6 +11,7 @@ const AddOnSelector = ({ selectedAddOns, onToggle }) => {
             if (newSet.has(addOnId)) {
                 newSet.delete(addOnId);
             } else {
+                newSet.clear();
                 newSet.add(addOnId);
             }
             return newSet;
