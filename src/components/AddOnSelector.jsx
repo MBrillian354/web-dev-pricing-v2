@@ -52,7 +52,7 @@ const AddOnSelector = ({ selectedAddOns, onToggle }) => {
                         onClick={() => onToggle(addOn.id)}
                     >
                         <div className="flex items-center justify-between">
-                            <div className="flex items-center">
+                            <div className="flex items-center flex-shrink-0">
                                 <input
                                     type="checkbox"
                                     checked={selectedAddOns.includes(addOn.id)}
