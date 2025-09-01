@@ -3,6 +3,40 @@ import { addOns } from "../constants/pricingData.js";
 import { formatCurrency } from "../utils/formatCurrency.js";
 
 const AddOnSelector = ({ selectedAddOns, onToggle }) => {
+    const getPriceText = (addOn) => {
+        let text = "";
+        if (addOn.oneTime) {
+            if (Array.isArray(addOn.oneTime)) {
+                text += `${formatCurrency(addOn.oneTime[0])} - ${formatCurrency(
+                    addOn.oneTime[1]
+                )}`;
+            } else {
+                text += formatCurrency(addOn.oneTime);
+            }
+            text += " (one-time)";
+        }
+        if (addOn.monthly) {
+            if (text) text += " | ";
+            if (Array.isArray(addOn.monthly)) {
+                text += `${formatCurrency(addOn.monthly[0])} - ${formatCurrency(
+                    addOn.monthly[1]
+                )}/mo`;
+            } else {
+                text += formatCurrency(addOn.monthly) + "/mo";
+            }
+        }
+        if (addOn.annual) {
+            if (text) text += " | ";
+            if (Array.isArray(addOn.annual)) {
+                text += `${formatCurrency(addOn.annual[0])} - ${formatCurrency(
+                    addOn.annual[1]
+                )}/yr`;
+            } else {
+                text += formatCurrency(addOn.annual) + "/yr";
+            }
+        }
+        return text;
+    };
     return (
         <div>
             <h3 className="section-title">Add-on Services</h3>
@@ -30,9 +64,7 @@ const AddOnSelector = ({ selectedAddOns, onToggle }) => {
                                 </label>
                             </div>
                             <span className="text-sm font-medium text-blue-600">
-                                {formatCurrency(addOn.cost)}
-                                {addOn.monthly && "/mo"}
-                                {addOn.yearly && "/yr"}
+                                {getPriceText(addOn)}
                             </span>
                         </div>
                     </div>
