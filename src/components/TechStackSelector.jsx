@@ -17,7 +17,7 @@ const TechStackSelector = ({ techStacks, selectedTech, onSelect }) => {
                     >
                         <div className="flex items-center">
                             <div
-                                className={`radio-base ${
+                                className={`radio-base items-center flex-shrink-0 ${
                                     selectedTech.id === tech.id
                                         ? "radio-selected"
                                         : "radio-unselected"
