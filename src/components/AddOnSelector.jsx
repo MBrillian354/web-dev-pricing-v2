@@ -44,8 +44,15 @@ const AddOnSelector = ({ selectedAddOns, onToggle }) => {
     const getSummaryText = (addOn) => {
         const options = getPricingOptions(addOn);
         if (options.length === 0) return "";
-        const prices = options.map((o) => formatCurrency(o.amount));
-        return `Prices from ${prices.join(" to ")}`;
+        if (options.length === 1) {
+            return `Prices from only ${formatCurrency(options[0].amount)}`;
+        }
+        const amounts = options.map((o) => o.amount);
+        const minAmount = Math.min(...amounts);
+        const maxAmount = Math.max(...amounts);
+        return `Prices from ${formatCurrency(minAmount)} to ${formatCurrency(
+            maxAmount
+        )}`;
     };
 
     const isSelected = (addOnId, pricing) => {
@@ -70,19 +77,24 @@ const AddOnSelector = ({ selectedAddOns, onToggle }) => {
                     return (
                         <div
                             key={addOn.id}
-                            className={`card-base ${
+                            className={`card-base flex justify-between items-center ${
                                 selected ? "card-selected" : "card-unselected"
                             }`}
                             onClick={() => toggleExpand(addOn.id)}
                             style={{ position: "relative" }}
                         >
-                            <div className="flex items-center justify-between">
+                            <div className="flex flex-col justify-start">
                                 <div className="flex items-center flex-shrink-0">
-                                    <span className="text-sm font-medium text-gray-700 cursor-pointer">
+                                    <span className="text-base font-medium text-gray-700 cursor-pointer">
                                         {addOn.label}
                                     </span>
                                 </div>
-                                <div className="text-right">
+                                <div className="flex items-center flex-shrink-0">
+                                    <span className="text-sm text-gray-500 cursor-pointer">
+                                        {addOn.desc}
+                                    </span>
+                                </div>
+                                <div className="mt-4">
                                     {selected ? (
                                         <span className="text-sm font-medium text-blue-600">
                                             Selected:{" "}
@@ -96,9 +108,6 @@ const AddOnSelector = ({ selectedAddOns, onToggle }) => {
                                             {getSummaryText(addOn)}
                                         </span>
                                     )}
-                                    <span className="ml-2">
-                                        {isExpanded ? "▲" : "▼"}
-                                    </span>
                                 </div>
                             </div>
                             {isExpanded && (
@@ -145,6 +154,9 @@ const AddOnSelector = ({ selectedAddOns, onToggle }) => {
                                     ))}
                                 </div>
                             )}
+                            <span className="ml-2">
+                                {isExpanded ? "▲" : "▼"}
+                            </span>
                         </div>
                     );
                 })}

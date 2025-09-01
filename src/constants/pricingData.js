@@ -460,18 +460,21 @@ export const addOns = [
     {
         id: "maintenance-basic",
         label: "Basic (Updates & Backup)",
+        desc: "Monthly updates and backups for your website.",
         monthly: 75000,
         annual: 750000,
     },
     {
         id: "maintenance-standard",
         label: "Standard (+ Monitoring)",
+        desc: "Standard maintenance including monitoring and security checks.",
         monthly: 150000,
         annual: 1500000,
     },
     {
         id: "maintenance-premium",
         label: "Premium (+ Priority Support)",
+        desc: "Premium maintenance with priority support and advanced monitoring.",
         monthly: 300000,
         annual: 3000000,
     },
@@ -479,30 +482,40 @@ export const addOns = [
     {
         id: "speed-optimization",
         label: "Speed Optimization",
+        desc: "Optimize website performance for faster loading times.",
         oneTime: 500000,
     },
     {
         id: "security-audit",
         label: "Security Audit",
+        desc: "Security audit to identify vulnerabilities.",
         oneTime: 700000,
     },
     {
         id: "penetration-testing",
         label: "Penetration Testing",
+        desc: "Penetration testing to simulate attacks.",
         oneTime: 1375000,
     },
     // {
     //     id: "cdn-setup",
     //     label: "CDN Setup",
+    //     desc: "Setup of Content Delivery Network for faster global access.",
     //     oneTime: 275000,
     //     monthly: 25000,
     //     annual: 250000,
     // },
     // Marketing & SEO
-    // { id: "seo-audit", label: "SEO Audit", oneTime: 425000 },
+    // {
+    //     id: "seo-audit",
+    //     label: "SEO Audit",
+    //     desc: "Comprehensive SEO audit to analyze website optimization.",
+    //     oneTime: 425000,
+    // },
     // {
     //     id: "seo-optimization",
     //     label: "SEO Optimization",
+    //     desc: "Ongoing SEO optimization services to improve search rankings.",
     //     oneTime: 875000,
     //     monthly: 275000,
     //     annual: 2750000,
@@ -510,12 +523,14 @@ export const addOns = [
     {
         id: "content-creation",
         label: "Content Creation",
+        desc: "Content creation for blogs and marketing.",
         monthly: 100000,
         annual: 1000000,
     },
     {
         id: "google-ads-management",
         label: "Google Ads Management",
+        desc: "Setup and management of Google Ads campaigns.",
         oneTime: 150000,
         monthly: 175000,
         annual: 1500000,
@@ -524,38 +539,50 @@ export const addOns = [
     {
         id: "training-basic",
         label: "Basic Training (2 hours)",
+        desc: "2 hours of basic training for website management.",
         oneTime: 200000,
     },
     {
         id: "training-advanced",
         label: "Advanced Training (8 hours)",
+        desc: "8 hours of advanced training for team members.",
         oneTime: 700000,
     },
     {
         id: "documentation",
         label: "Documentation",
+        desc: "Comprehensive documentation for your website.",
         oneTime: 500000,
     },
     {
         id: "video-tutorials",
         label: "Video Tutorials",
+        desc: "Custom video tutorials for training purposes.",
         oneTime: 800000,
     },
     // Hosting & Infrastructure
-    { id: "hosting-basic", label: "Basic Hosting", annual: 75000 },
+    {
+        id: "hosting-basic",
+        label: "Basic Hosting",
+        desc: "Basic shared hosting for your website.",
+        annual: 75000,
+    },
     {
         id: "hosting-vps",
         label: "VPS/Cloud Hosting",
+        desc: "VPS or cloud hosting for better performance.",
         annual: 675000,
     },
     {
         id: "domain-registration",
         label: "Domain Registration",
+        desc: "Domain registration and management.",
         annual: 50000,
     },
     {
         id: "ssl-certificate",
         label: "SSL Certificate",
+        desc: "SSL certificate for secure website connections.",
         annual: 120000,
     },
 ];
