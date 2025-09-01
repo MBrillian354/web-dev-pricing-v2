@@ -8,9 +8,7 @@ const ModuleSelector = ({ selectedModules, onToggle }) => {
 
     return (
         <div className="mb-6">
-            <h3 className="text-lg font-medium text-gray-700 mb-3">
-                Functional Modules
-            </h3>
+            <h3 className="section-title">Functional Modules</h3>
             <div className="border border-gray-400 rounded-lg divide-y divide-gray-400">
                 {categories.map((category) => (
                     <div key={category} className="p-4">
@@ -34,7 +32,7 @@ const ModuleSelector = ({ selectedModules, onToggle }) => {
                                                 module.id
                                             )}
                                             onChange={() => {}}
-                                            className="h-4 w-4 text-blue-600 rounded focus:ring-blue-500"
+                                            className="checkbox"
                                         />
                                         <label className="ml-2 text-sm text-gray-700 flex-1 cursor-pointer">
                                             {module.label}

@@ -19,14 +19,14 @@ const PricingSummary = ({
                 </h2>
 
                 <div className="space-y-4 mb-6">
-                    <div className="flex justify-between">
+                    <div className="flex-between">
                         <span className="text-gray-600">Base Application</span>
                         <span className="font-medium">
                             {formatCurrency(selectedBase.price)}
                         </span>
                     </div>
 
-                    <div className="flex justify-between">
+                    <div className="flex-between">
                         <span className="text-gray-600">
                             Tech Stack Multiplier ({selectedTech.multiplier}x)
                         </span>
@@ -40,7 +40,7 @@ const PricingSummary = ({
 
                     {selectedModules.length > 0 && (
                         <div>
-                            <div className="flex justify-between font-medium">
+                            <div className="flex-between font-medium">
                                 <span className="text-gray-600">Modules</span>
                                 <span>
                                     {formatCurrency(
@@ -64,7 +64,7 @@ const PricingSummary = ({
                                     return module ? (
                                         <div
                                             key={id}
-                                            className="flex justify-between text-gray-600"
+                                            className="flex-between text-gray-600"
                                         >
                                             <span>+ {module.label}</span>
                                             <span>
@@ -78,7 +78,7 @@ const PricingSummary = ({
                     )}
 
                     <div className="border-t pt-4">
-                        <div className="flex justify-between font-medium">
+                        <div className="flex-between font-medium">
                             <span>Subtotal</span>
                             <span>{formatCurrency(subtotal)}</span>
                         </div>
@@ -86,7 +86,7 @@ const PricingSummary = ({
 
                     {selectedAddOns.length > 0 && (
                         <div>
-                            <div className="flex justify-between font-medium">
+                            <div className="flex-between font-medium">
                                 <span className="text-gray-600">Add-ons</span>
                                 <span>{formatCurrency(addOnsTotal)}</span>
                             </div>
@@ -98,7 +98,7 @@ const PricingSummary = ({
                                     return addOn ? (
                                         <div
                                             key={id}
-                                            className="flex justify-between text-gray-600"
+                                            className="flex-between text-gray-600"
                                         >
                                             <span>+ {addOn.label}</span>
                                             <span>
@@ -113,7 +113,7 @@ const PricingSummary = ({
                 </div>
 
                 <div className="border-t pt-4 mt-4">
-                    <div className="flex justify-between text-lg font-bold">
+                    <div className="flex-between text-lg font-bold">
                         <span>Total Estimated Cost</span>
                         <span className="text-blue-600">
                             {formatCurrency(total)}
