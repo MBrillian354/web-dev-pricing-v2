@@ -130,13 +130,13 @@ const PricingSummary = ({
 
                         {selectedAddOns.length > 0 && (
                             <div>
-                                <div className="flex-between font-medium">
-                                    <span className="text-gray-600">
+                                <div className="flex-between text-sm font-medium">
+                                    <span className="text-gray-500">
                                         Add-ons
                                     </span>
                                     <span>{formatCurrency(addOnsTotal)}</span>
                                 </div>
-                                <div className="mt-2 pl-4 text-sm">
+                                <div className="mt-2 pl-4 text-xs">
                                     {selectedAddOns.map((selected) => {
                                         const addOn = addOns.find(
                                             (a) => a.id === selected.id
