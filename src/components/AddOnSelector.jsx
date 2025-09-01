@@ -73,6 +73,7 @@ const AddOnSelector = ({ selectedAddOns, onToggle }) => {
                                 selected ? "card-selected" : "card-unselected"
                             }`}
                             onClick={() => toggleExpand(addOn.id)}
+                            style={{ position: "relative" }}
                         >
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center flex-shrink-0">
@@ -100,18 +101,33 @@ const AddOnSelector = ({ selectedAddOns, onToggle }) => {
                                 </div>
                             </div>
                             {isExpanded && (
-                                <div className="mt-4 space-y-2">
+                                <div
+                                    style={{
+                                        position: "absolute",
+                                        top: "100%",
+                                        left: 0,
+                                        right: 0,
+                                        zIndex: 10,
+                                        backgroundColor: "white",
+                                        border: "1px solid #e5e7eb",
+                                        borderRadius: "0.5rem",
+                                        boxShadow:
+                                            "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
+                                        // padding: "1rem",
+                                    }}
+                                >
                                     {getPricingOptions(addOn).map((pricing) => (
                                         <button
                                             key={pricing.type}
-                                            className={`w-full text-left p-2 rounded ${
+                                            className={`w-full text-left px-4 py-2 hover:cursor-pointer hover:bg-blue-50 ${
                                                 isSelected(addOn.id, pricing)
-                                                    ? "bg-blue-100 border-blue-300"
-                                                    : "bg-gray-50 border-gray-200"
-                                            } border`}
+                                                    ? "bg-blue-100"
+                                                    : "bg-white"
+                                            }`}
                                             onClick={(e) => {
                                                 e.stopPropagation();
                                                 onToggle(addOn.id, pricing);
+                                                toggleExpand(addOn.id);
                                             }}
                                         >
                                             <div className="flex justify-between items-center">

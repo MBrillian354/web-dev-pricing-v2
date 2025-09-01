@@ -23,7 +23,7 @@ const ModuleSelector = ({ selectedModules, onToggle }) => {
                                 .map((module) => (
                                     <div
                                         key={module.id}
-                                        className="flex items-center p-2 rounded hover:bg-gray-50 cursor-pointer"
+                                        className="flex items-center p-2 rounded hover:bg-blue-50 cursor-pointer"
                                         onClick={() => onToggle(module.id)}
                                     >
                                         <input
