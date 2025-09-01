@@ -9,7 +9,8 @@ import { usePricingCalculator } from "./hooks/usePricingCalculator";
 
 const App = () => {
     // State
-    const [selectedBase, setSelectedBase] = useState(baseTypes[0]);
+    const firstCategoryTypes = Object.values(baseTypes)[0];
+    const [selectedBase, setSelectedBase] = useState(firstCategoryTypes[0]);
     const [selectedTech, setSelectedTech] = useState(techStacks[0]);
     const [selectedModules, setSelectedModules] = useState([]);
     const [selectedAddOns, setSelectedAddOns] = useState([]);

@@ -1,6 +1,6 @@
 // Base application types
 export const baseTypes = {
-    "Standard Business Applications": [
+    "landing-page": [
         {
             id: "landing-page-starter",
             label: "Landing Page (Starter)",
@@ -19,6 +19,8 @@ export const baseTypes = {
             price: 30000000,
             desc: "5+ pages, premium custom design, advanced animations, A/B testing setup, multi-language support.",
         },
+    ],
+    "business-website": [
         {
             id: "business-website-starter",
             label: "Business Website (Starter)",
@@ -37,6 +39,8 @@ export const baseTypes = {
             price: 60000000,
             desc: "20+ pages, multi-language, role-based access, custom module development, API integrations.",
         },
+    ],
+    dashboard: [
         {
             id: "dashboard-starter",
             label: "Dashboard App (Starter)",
@@ -55,6 +59,8 @@ export const baseTypes = {
             price: 80000000,
             desc: "Advanced access control, real-time analytics, data export (PDF/Excel), 3rd party integrations, audit logs.",
         },
+    ],
+    ecommerce: [
         {
             id: "ecommerce-starter",
             label: "E-commerce (Starter)",
@@ -73,6 +79,8 @@ export const baseTypes = {
             price: 80000000,
             desc: "Unlimited products, multi-vendor support, advanced reporting, API for integrations, subscription models.",
         },
+    ],
+    "enterprise-portal": [
         {
             id: "enterprise-portal-starter",
             label: "Enterprise Portal (Starter)",
@@ -92,7 +100,7 @@ export const baseTypes = {
             desc: "Custom workflows, SSO integration, comprehensive API layer, advanced security audits, multi-system integration.",
         },
     ],
-    "Educational & Academic Systems": [
+    sis: [
         {
             id: "sis-starter",
             label: "Student Info System (Starter)",
@@ -111,6 +119,8 @@ export const baseTypes = {
             price: 120000000,
             desc: "Financial aid integration, scheduling automation, compliance reporting, integration with other school systems (LMS, library).",
         },
+    ],
+    lms: [
         {
             id: "lms-starter",
             label: "Learning Management System (Starter)",
