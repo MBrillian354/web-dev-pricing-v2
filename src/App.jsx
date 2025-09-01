@@ -97,6 +97,7 @@ const App = () => {
                             <ModuleSelector
                                 selectedModules={selectedModules}
                                 onToggle={toggleModule}
+                                selectedBase={selectedBase}
                             />
 
                             <AddOnSelector

@@ -1,10 +1,23 @@
 import React from "react";
-import { modules } from "../constants/pricingData.js";
+import { modules, baseTypeModuleCategories } from "../constants/pricingData.js";
 import { formatCurrency } from "../utils/formatCurrency.js";
 
-const ModuleSelector = ({ selectedModules, onToggle }) => {
-    // Dynamically get unique categories from modules data
-    const categories = Array.from(new Set(modules.map((m) => m.category)));
+const ModuleSelector = ({ selectedModules, onToggle, selectedBase }) => {
+    // Get the base type category from selectedBase.id (e.g., "landing-page-starter" -> "landing-page")
+    const baseTypeCategory = selectedBase.id.split("-").slice(0, -1).join("-");
+
+    // Get relevant categories for the selected base type
+    const relevantCategories = baseTypeModuleCategories[baseTypeCategory] || [];
+
+    // Filter modules to only those in relevant categories
+    const relevantModules = modules.filter((module) =>
+        relevantCategories.includes(module.category)
+    );
+
+    // Get unique categories from relevant modules
+    const categories = Array.from(
+        new Set(relevantModules.map((m) => m.category))
+    );
 
     return (
         <div className="mb-6">
@@ -16,7 +29,7 @@ const ModuleSelector = ({ selectedModules, onToggle }) => {
                             {category}
                         </h4>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                            {modules
+                            {relevantModules
                                 .filter(
                                     (module) => module.category === category
                                 )
