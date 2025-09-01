@@ -33,12 +33,32 @@ const App = () => {
     };
 
     // Toggle add-on selection
-    const toggleAddOn = (addOnId) => {
-        setSelectedAddOns((prev) =>
-            prev.includes(addOnId)
-                ? prev.filter((id) => id !== addOnId)
-                : [...prev, addOnId]
-        );
+    const toggleAddOn = (addOnId, selectedPricing) => {
+        setSelectedAddOns((prev) => {
+            const existingIndex = prev.findIndex((s) => s.id === addOnId);
+            if (existingIndex !== -1) {
+                const existing = prev[existingIndex];
+                if (
+                    existing.selectedPricing &&
+                    existing.selectedPricing.type === selectedPricing.type &&
+                    existing.selectedPricing.amount === selectedPricing.amount
+                ) {
+                    // Deselect if same
+                    return prev.filter((s) => s.id !== addOnId);
+                } else {
+                    // Update pricing
+                    const newSelected = [...prev];
+                    newSelected[existingIndex] = {
+                        id: addOnId,
+                        selectedPricing,
+                    };
+                    return newSelected;
+                }
+            } else {
+                // Add new
+                return [...prev, { id: addOnId, selectedPricing }];
+            }
+        });
     };
 
     return (

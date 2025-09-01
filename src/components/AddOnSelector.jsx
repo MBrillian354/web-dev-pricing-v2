@@ -1,74 +1,136 @@
-import React from "react";
+import React, { useState } from "react";
 import { addOns } from "../constants/pricingData.js";
 import { formatCurrency } from "../utils/formatCurrency.js";
 
 const AddOnSelector = ({ selectedAddOns, onToggle }) => {
-    const getPriceText = (addOn) => {
-        let text = "";
-        if (addOn.oneTime) {
-            if (Array.isArray(addOn.oneTime)) {
-                text += `${formatCurrency(addOn.oneTime[0])} - ${formatCurrency(
-                    addOn.oneTime[1]
-                )}`;
+    const [expandedAddOns, setExpandedAddOns] = useState(new Set());
+
+    const toggleExpand = (addOnId) => {
+        setExpandedAddOns((prev) => {
+            const newSet = new Set(prev);
+            if (newSet.has(addOnId)) {
+                newSet.delete(addOnId);
             } else {
-                text += formatCurrency(addOn.oneTime);
+                newSet.add(addOnId);
             }
-            text += " (one-time)";
+            return newSet;
+        });
+    };
+
+    const getPricingOptions = (addOn) => {
+        const options = [];
+        if (addOn.oneTime) {
+            const amount = Array.isArray(addOn.oneTime)
+                ? addOn.oneTime[0]
+                : addOn.oneTime;
+            options.push({ type: "oneTime", amount, label: "One-time" });
         }
         if (addOn.monthly) {
-            if (text) text += " | ";
-            if (Array.isArray(addOn.monthly)) {
-                text += `${formatCurrency(addOn.monthly[0])} - ${formatCurrency(
-                    addOn.monthly[1]
-                )}/mo`;
-            } else {
-                text += formatCurrency(addOn.monthly) + "/mo";
-            }
+            const amount = Array.isArray(addOn.monthly)
+                ? addOn.monthly[0]
+                : addOn.monthly;
+            options.push({ type: "monthly", amount, label: "Monthly" });
         }
         if (addOn.annual) {
-            if (text) text += " | ";
-            if (Array.isArray(addOn.annual)) {
-                text += `${formatCurrency(addOn.annual[0])} - ${formatCurrency(
-                    addOn.annual[1]
-                )}/yr`;
-            } else {
-                text += formatCurrency(addOn.annual) + "/yr";
-            }
+            const amount = Array.isArray(addOn.annual)
+                ? addOn.annual[0]
+                : addOn.annual;
+            options.push({ type: "annual", amount, label: "Annual" });
         }
-        return text;
+        return options;
     };
+
+    const getSummaryText = (addOn) => {
+        const options = getPricingOptions(addOn);
+        if (options.length === 0) return "";
+        const prices = options.map((o) => formatCurrency(o.amount));
+        return `Prices from ${prices.join(" to ")}`;
+    };
+
+    const isSelected = (addOnId, pricing) => {
+        const selected = selectedAddOns.find((s) => s.id === addOnId);
+        return (
+            selected &&
+            selected.selectedPricing &&
+            selected.selectedPricing.type === pricing.type &&
+            selected.selectedPricing.amount === pricing.amount
+        );
+    };
+
     return (
         <div>
             <h3 className="section-title">Add-on Services</h3>
             <div className="grid-cols-md">
-                {addOns.map((addOn) => (
-                    <div
-                        key={addOn.id}
-                        className={`card-base ${
-                            selectedAddOns.includes(addOn.id)
-                                ? "card-selected"
-                                : "card-unselected"
-                        }`}
-                        onClick={() => onToggle(addOn.id)}
-                    >
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center flex-shrink-0">
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAddOns.includes(addOn.id)}
-                                    onChange={() => {}}
-                                    className="checkbox"
-                                />
-                                <label className="ml-2 text-sm font-medium text-gray-700 cursor-pointer">
-                                    {addOn.label}
-                                </label>
+                {addOns.map((addOn) => {
+                    const isExpanded = expandedAddOns.has(addOn.id);
+                    const selected = selectedAddOns.find(
+                        (s) => s.id === addOn.id
+                    );
+                    return (
+                        <div
+                            key={addOn.id}
+                            className={`card-base ${
+                                selected ? "card-selected" : "card-unselected"
+                            }`}
+                            onClick={() => toggleExpand(addOn.id)}
+                        >
+                            <div className="flex items-center justify-between">
+                                <div className="flex items-center flex-shrink-0">
+                                    <span className="text-sm font-medium text-gray-700 cursor-pointer">
+                                        {addOn.label}
+                                    </span>
+                                </div>
+                                <div className="text-right">
+                                    {selected ? (
+                                        <span className="text-sm font-medium text-blue-600">
+                                            Selected:{" "}
+                                            {selected.selectedPricing.label}{" "}
+                                            {formatCurrency(
+                                                selected.selectedPricing.amount
+                                            )}
+                                        </span>
+                                    ) : (
+                                        <span className="text-sm text-gray-500">
+                                            {getSummaryText(addOn)}
+                                        </span>
+                                    )}
+                                    <span className="ml-2">
+                                        {isExpanded ? "▲" : "▼"}
+                                    </span>
+                                </div>
                             </div>
-                            <span className="text-sm font-medium text-blue-600">
-                                {getPriceText(addOn)}
-                            </span>
+                            {isExpanded && (
+                                <div className="mt-4 space-y-2">
+                                    {getPricingOptions(addOn).map((pricing) => (
+                                        <button
+                                            key={pricing.type}
+                                            className={`w-full text-left p-2 rounded ${
+                                                isSelected(addOn.id, pricing)
+                                                    ? "bg-blue-100 border-blue-300"
+                                                    : "bg-gray-50 border-gray-200"
+                                            } border`}
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                onToggle(addOn.id, pricing);
+                                            }}
+                                        >
+                                            <div className="flex justify-between items-center">
+                                                <span className="text-sm font-medium">
+                                                    {pricing.label}
+                                                </span>
+                                                <span className="text-sm font-medium text-blue-600">
+                                                    {formatCurrency(
+                                                        pricing.amount
+                                                    )}
+                                                </span>
+                                            </div>
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
                         </div>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
         </div>
     );

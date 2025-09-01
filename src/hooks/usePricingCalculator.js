@@ -17,9 +17,10 @@ export const usePricingCalculator = (
 
         const subtotal = techMultipliedCost + modulesCost;
 
-        const addOnsTotal = selectedAddOns.reduce((sum, addOnId) => {
-            const addOn = addOns.find((a) => a.id === addOnId);
-            return sum + (addOn ? addOn.cost : 0);
+        const addOnsTotal = selectedAddOns.reduce((sum, selected) => {
+            const addOn = addOns.find((a) => a.id === selected.id);
+            if (!addOn || !selected.selectedPricing) return sum;
+            return sum + selected.selectedPricing.amount;
         }, 0);
 
         return {
