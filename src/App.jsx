@@ -114,6 +114,10 @@ const App = () => {
                         subtotal={subtotal}
                         addOnsTotal={addOnsTotal}
                         total={total}
+                        onRemoveModule={toggleModule}
+                        onRemoveAddOn={(selected) =>
+                            toggleAddOn(selected.id, selected.selectedPricing)
+                        }
                     />
                 </div>
             </div>
