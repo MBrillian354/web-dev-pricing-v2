@@ -9,7 +9,7 @@
 }
 
 @utility card-base {
-    @apply border rounded-lg p-4 cursor-pointer transition-all shadow-sm hover:shadow-md;
+    @apply border rounded-lg p-4 cursor-pointer transition-all;
 }
 
 @utility card-selected {
@@ -21,7 +21,7 @@
 }
 
 @utility radio-base {
-    @apply w-5 h-5 rounded-full border flex items-center justify-center mr-3;
+    @apply size-5 rounded-full border flex items-center justify-center mr-3;
 }
 
 @utility radio-selected {
