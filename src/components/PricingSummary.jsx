@@ -13,122 +13,144 @@ const PricingSummary = ({
 }) => {
     return (
         <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg p-6 sticky top-6">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-                    Cost Estimate
-                </h2>
+            <div className="flex flex-col gap-6 sticky top-6">
+                <div className="bg-white rounded-lg">
+                    <h2 className="text-2xl font-semibold text-gray-800 mb-6 p-6">
+                        Cost Estimate
+                    </h2>
 
-                <div className="space-y-4 mb-6">
-                    <div className="flex-between">
-                        <span className="text-gray-600">Base Application</span>
-                        <span className="font-medium">
-                            {formatCurrency(selectedBase.price)}
-                        </span>
-                    </div>
+                    <div className="space-y-4 mb-6 px-6">
+                        <div className="flex-between">
+                            <span className="text-gray-600">
+                                Base Application
+                            </span>
+                            <span className="font-medium">
+                                {formatCurrency(selectedBase.price)}
+                            </span>
+                        </div>
 
-                    <div className="flex-between">
-                        <span className="text-gray-600">
-                            Tech Stack Multiplier ({selectedTech.multiplier}x)
-                        </span>
-                        <span className="font-medium">
-                            {formatCurrency(
-                                selectedBase.price *
-                                    (selectedTech.multiplier - 1)
-                            )}
-                        </span>
-                    </div>
+                        <div className="flex-between">
+                            <span className="text-gray-600">
+                                Tech Stack Multiplier ({selectedTech.multiplier}
+                                x)
+                            </span>
+                            <span className="font-medium">
+                                {formatCurrency(
+                                    selectedBase.price *
+                                        (selectedTech.multiplier - 1)
+                                )}
+                            </span>
+                        </div>
 
-                    {selectedModules.length > 0 && (
-                        <div>
+                        {selectedModules.length > 0 && (
+                            <div>
+                                <div className="flex-between font-medium">
+                                    <span className="text-gray-600">
+                                        Modules
+                                    </span>
+                                    <span>
+                                        {formatCurrency(
+                                            selectedModules.reduce(
+                                                (sum, id) => {
+                                                    const module = modules.find(
+                                                        (m) => m.id === id
+                                                    );
+                                                    return (
+                                                        sum +
+                                                        (module
+                                                            ? module.price
+                                                            : 0)
+                                                    );
+                                                },
+                                                0
+                                            )
+                                        )}
+                                    </span>
+                                </div>
+                                <div className="mt-2 pl-4 text-sm">
+                                    {selectedModules.map((id) => {
+                                        const module = modules.find(
+                                            (m) => m.id === id
+                                        );
+                                        return module ? (
+                                            <div
+                                                key={id}
+                                                className="flex-between text-gray-600"
+                                            >
+                                                <span>+ {module.label}</span>
+                                                <span>
+                                                    {formatCurrency(
+                                                        module.price
+                                                    )}
+                                                </span>
+                                            </div>
+                                        ) : null;
+                                    })}
+                                </div>
+                            </div>
+                        )}
+
+                        <div className="border-t pt-4">
                             <div className="flex-between font-medium">
-                                <span className="text-gray-600">Modules</span>
-                                <span>
-                                    {formatCurrency(
-                                        selectedModules.reduce((sum, id) => {
-                                            const module = modules.find(
-                                                (m) => m.id === id
-                                            );
-                                            return (
-                                                sum +
-                                                (module ? module.price : 0)
-                                            );
-                                        }, 0)
-                                    )}
-                                </span>
-                            </div>
-                            <div className="mt-2 pl-4 text-sm">
-                                {selectedModules.map((id) => {
-                                    const module = modules.find(
-                                        (m) => m.id === id
-                                    );
-                                    return module ? (
-                                        <div
-                                            key={id}
-                                            className="flex-between text-gray-600"
-                                        >
-                                            <span>+ {module.label}</span>
-                                            <span>
-                                                {formatCurrency(module.price)}
-                                            </span>
-                                        </div>
-                                    ) : null;
-                                })}
+                                <span>Subtotal</span>
+                                <span>{formatCurrency(subtotal)}</span>
                             </div>
                         </div>
-                    )}
 
-                    <div className="border-t pt-4">
-                        <div className="flex-between font-medium">
-                            <span>Subtotal</span>
-                            <span>{formatCurrency(subtotal)}</span>
-                        </div>
+                        {selectedAddOns.length > 0 && (
+                            <div>
+                                <div className="flex-between font-medium">
+                                    <span className="text-gray-600">
+                                        Add-ons
+                                    </span>
+                                    <span>{formatCurrency(addOnsTotal)}</span>
+                                </div>
+                                <div className="mt-2 pl-4 text-sm">
+                                    {selectedAddOns.map((selected) => {
+                                        const addOn = addOns.find(
+                                            (a) => a.id === selected.id
+                                        );
+                                        return addOn ? (
+                                            <div
+                                                key={selected.id}
+                                                className="flex-between text-gray-600"
+                                            >
+                                                <span>
+                                                    + {addOn.label} (
+                                                    {
+                                                        selected.selectedPricing
+                                                            .label
+                                                    }
+                                                    )
+                                                </span>
+                                                <span>
+                                                    {formatCurrency(
+                                                        selected.selectedPricing
+                                                            .amount
+                                                    )}
+                                                </span>
+                                            </div>
+                                        ) : null;
+                                    })}
+                                </div>
+                            </div>
+                        )}
                     </div>
 
-                    {selectedAddOns.length > 0 && (
-                        <div>
-                            <div className="flex-between font-medium">
-                                <span className="text-gray-600">Add-ons</span>
-                                <span>{formatCurrency(addOnsTotal)}</span>
-                            </div>
-                            <div className="mt-2 pl-4 text-sm">
-                                {selectedAddOns.map((id) => {
-                                    const addOn = addOns.find(
-                                        (a) => a.id === id
-                                    );
-                                    return addOn ? (
-                                        <div
-                                            key={id}
-                                            className="flex-between text-gray-600"
-                                        >
-                                            <span>+ {addOn.label}</span>
-                                            <span>
-                                                {formatCurrency(addOn.cost)}
-                                            </span>
-                                        </div>
-                                    ) : null;
-                                })}
-                            </div>
+                    <div className="bg-gray-800 p-6 rounded-b-lg text-white">
+                        <div className="flex-between text-md font-medium">
+                            <span>Estimated Cost</span>
+                            <span className="text-green-400">
+                                {formatCurrency(total)}
+                            </span>
                         </div>
-                    )}
-                </div>
 
-                <div className="border-t pt-4 mt-4">
-                    <div className="flex-between text-lg font-bold">
-                        <span>Total Estimated Cost</span>
-                        <span className="text-blue-600">
-                            {formatCurrency(total)}
-                        </span>
+                        <button className="w-full mt-4 bg-blue-200 hover:bg-blue-300 text-black font-medium py-3 px-4 rounded-full hover:cursor-pointer transition-colors">
+                            Get Detailed Quote
+                        </button>
                     </div>
-                    <p className="text-sm text-gray-500 mt-2">
-                        One-time development cost
-                    </p>
                 </div>
-
-                <button className="w-full mt-6 bg-blue-600 hover:bg-blue-500 text-white font-medium py-3 px-4 rounded-md hover:cursor-pointer transition-colors">
-                    Get Detailed Quote
-                </button>
-
-                <div className="mt-6 text-sm text-gray-500">
+                <div className="px-4 text-xs text-gray-700 ">
                     <p>
                         This estimate is based on our modular pricing model.
                         Final pricing may vary based on specific requirements
